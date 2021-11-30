@@ -1,0 +1,58 @@
+main {
+    background-image: url("img/amirali-mirhashemian-uQr-pBGLhEY-unsplash.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+article {
+    max-width: 1200px;
+    margin: auto;
+    width: 100%;
+    flex-basis: 100%;
+    background-color: rgba(255,255,255,.5);
+    padding: 5%;
+    margin-right: auto;
+    margin-left: auto;
+}
+button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    max-width: 250px;
+}
+* { text-align: center; }
+
+.icon .img-fluid { max-width: 100px; }
+
+.w-100 {
+    width: 100% !important;
+}
+.d-block {
+    display: block !important;
+}
+h1 {
+    font-size: calc(1.375rem + 1.5vw);
+    margin-top: 0;
+    margin-bottom: .5rem;
+    color: white;
+}
+
+.w-50 {
+    width: 50% !important;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+.col {
+    flex: 1 0 0%;
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Abenteuer</title>
+        <meta charset="utf-8">
+        <script src="abenteuerJson.js"></script>
+        <script src="abenteuer.js"></script>
+        <style>
+            body {
+                background: #966F33;
+            }
+            .alterBildschirm {
+                font-size: 20px;
+                font-family: courier, terminal, monospace;
+                font-weight: bold;
+                color: #FBC624;
+                text-shadow: 2px 2px 2px #E5AC05;
+                width: 680px; height: 400px;
+                background: #222222;
+                padding: 25px;
+                border-radius: 15px;
+                margin: 30px auto;
+                box-shadow: inset -1px 2px 10px 5px grey;
+            }
+        </style>
+    </head>
+    <body>
+    <!--
+        Versucht bei jedem neuen Kapitel den Hintergrund zu ändern
+    -->
+        <p class="alterBildschirm" id="monitor">
+            >Textadventure
+        </p>
+        <script>
+            eineSituation(0);
+        </script>
+    </body>
+</html>

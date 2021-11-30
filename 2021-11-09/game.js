@@ -1,67 +1,75 @@
 "use strict";
 
 // ToDo Variablen Deklarieren
-let a, b, c, sum, question, user, tip, userResult;
+let a, b, c, sum, question, userResult;
 let level = 1;
 
 // ToDo Buttons ausblenden und deaktivieren
+// $('.game button').prop('disabled', true);
+$('#start').hide();
 
 // ToDo 
 function username() {
   // Namen des Spielers abfragen und in eine Variable speichern
-
+  $('.user').append(' ' + prompt('Gibt deinen Spielernamen ein'));
   // Funktion aufrufen um den richtigen Button zu aktivieren
-
+  activeButton(level);
   // Play Button verstecken
-
+  $('#user').hide();
   // Restart Button einblenden
-
+  $('#start').show();
 }
 
 // ToDo 
 function activeButton(id) {
-  // Button klickbar machen
-
   // Button die Klasse active zufügen
-
-  // vorherigen Button deaktivieren
-
+  $('#btn-' + id).addClass('active'); 
   // vorherigen Button Klasse active entfernen
-
+  $('#btn-' + id).prev().removeClass('active');
   // Game mit Level aufrufen
-
+  game(id);
 }
 
 // ToDo 
 function start() {
   // input leeren
-
+  $('#result').val('');
   // Seite neu laden
-
+  location.reload();
 }
 
 // ToDo 
 function checkResult() {
   // Input auslesen
-
+  userResult = Number($('#result').val());
   // Überprüfen ob Userergebnis richtig ist
-
+  if(sum == userResult) {
     // wenn ja dann Ausgabe gut
-
+    $('#output').prepend(
+      "<div class='right'>Seht gut! Antwort ist richtig!<br>" + question +
+      "<br>" + userResult + "</div>"
+    );
     // Input Feld wieder leeren
-
+      $('#result').val('');
     // Level rauf zählen
-
+      level++;
     // nächsten Button aktivieren
-  
+      activeButton(level);
+  } else {
   // ansonsten
-
     // Ausgabe falsch
-
-  // Wenn level 9 erreicht
-
+    $('#output').prepend(
+      "<div class='wrong'>Antwort Falsch<br>" + question +
+      "<br>" + userResult + "</div>"
+    );
+    $('#result').val('');
+    activeButton(level);
+  }
+  // Wenn level 10 erreicht
+  if(level == 10) {
     // FadeOut
-
+    $('.fade').fadeOut(1500);
+  }
 }
 
 // Die Aufgaben in den Runden
@@ -126,5 +134,5 @@ function game(num) {
   }
   console.log(sum);
   // ToDo Ausgabe der Frage 
-
+  $('.question').text(question);
 }

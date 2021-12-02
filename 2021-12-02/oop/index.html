@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Orakel</title>
+    </head>
+    <body>
+        <main>
+            <button onclick="fragOrakel()">Frag das Orakel</button>
+            <div id="ausgabe"></div>
+        </main>
+        <script>
+            let gewaehlt;
+            class Auswahl {
+                /* es wird hier nur eine Zahl gespeichert */
+                letzteAuswahl = false;
+                liste = new Array();
+
+                nimmListe(arrayMitElementen) {
+                    this.liste = arrayMitElementen;
+                }
+
+                waehle() {
+                    do {
+                        gewaehlt = Math.round(Math.random() * (this.liste.length - 1))
+                    } while (gewaehlt == this.letzteAuswahl);
+                    this.letzteAuswahl = gewaehlt;
+                    return this.liste[gewaehlt];
+                }
+            }
+            orakel = new Auswahl();
+            orakel.nimmListe(
+                ['ja', 'nein', 'vielleicht', 'weiß nicht', 'hab angst']
+            );
+            function fragOrakel() {
+                let antwortOrakel = orakel.waehle();
+                document.getElementById('ausgabe').innerHTML += '<p>' + antwortOrakel + '</p>';
+            }
+
+
+        </script>
+    </body>
+</html>

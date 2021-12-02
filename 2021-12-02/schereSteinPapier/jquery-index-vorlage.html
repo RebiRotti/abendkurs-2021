@@ -66,7 +66,6 @@
                 /*height: 'toggle'*/
             });
         }
-
         if( userChoice === 3 && compChoice === 2 || userChoice === 2 && compChoice === 1 || userChoice === 1 && compChoice === 3 ) {
             // User gewinnt
             icon(userChoice, 'User');
@@ -81,7 +80,6 @@
             result(compChoice, 'tie');
         }
     }
-
     function result(compChoice, what) {
         // ToDo Buttons disable true damit man sie während der Animation nicht klicken kann
         $('button').prop('disabled', true);
@@ -106,7 +104,7 @@
             $('#outputScore').text(userWins + " : " + compWins);
             // ToDo Buttons disable false damit man weiterspielen kann
             $('button').prop('disabled', false);
-            $('button').fadeIn('slow')
+            $('button').fadeIn('slow');
         }, forSchleife*400);
     }
 

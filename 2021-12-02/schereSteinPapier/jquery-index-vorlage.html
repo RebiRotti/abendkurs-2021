@@ -42,22 +42,29 @@
     let round = 0;
     let userWins = 0;
     let compWins = 0;
+    let forSchleife = 3;
 
 
     function play(userChoice) {
         // ToDo
         // Math.floor(Math.random() * (max - min +1)) + min;
-        // let compChoice = ???;
+        let compChoice = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
 
         // ToDo #outputChoiceComp Feld leeren
+        $('#outputChoiceComp').text('');
 
         // ToDo Runde + 1
+        round++;
 
         // ToDo Ausgabe der Runde in #outpuRound
+        $('#outputRound').text(round);
 
-        for(let i = 0; i < 10; i++) {
+        for(let i = 0; i < forSchleife; i++) {
             // ToDo Animation auf Buttons opacity toggle
-
+            $('button').animate({
+                opacity: 'toggle',
+                /*height: 'toggle'*/
+            });
         }
 
         if( userChoice === 3 && compChoice === 2 || userChoice === 2 && compChoice === 1 || userChoice === 1 && compChoice === 3 ) {
@@ -73,49 +80,36 @@
             icon(userChoice, 'User');
             result(compChoice, 'tie');
         }
-
-        if(userWins === 3 || compWins === 3) {
-            // ToDo Button Disable
-            if(userWins > compWins) {
-                // ToDo Ausgabe #info User hat gewonnen
-
-            } else {
-                // ToDo Ausgabe #info Computer hat gewonnen
-
-            }
-            setTimeout(function () {
-                // ToDo Wenn Spiel beendet Buttons verstecken
-
-            }, 4000);
-
-        }
     }
 
     function result(compChoice, what) {
         // ToDo Buttons disable true damit man sie während der Animation nicht klicken kann
-
+        $('button').prop('disabled', true);
         setTimeout(function () {
             if(what === 'user') {
                 // ToDo userWins + 1
-
+                userWins++;
                 // ToDo Ausgabe Text #howWins: User gewinnt
-
+                $('#howWins').text('User gewinnt');
             } else if(what === 'comp') {
                 // ToDo compWins + 1
-
+                compWins++;
                 // ToDo Ausgabe Text #howWins: Computer gewinnt
-
+                $('#howWins').text('Computer gewinnt');
             } else {
                 // ToDo Ausgabe Text #howWins: Unentschieden
-
+                $('#howWins').text('Unentschieden');
             }
             icon(compChoice, 'Comp');
+            checkEnd();
             // ToDo #outputScore ausgabe userWins : compWins
-
+            $('#outputScore').text(userWins + " : " + compWins);
             // ToDo Buttons disable false damit man weiterspielen kann
-            
-        }, 4000);
+            $('button').prop('disabled', false);
+            $('button').fadeIn('slow')
+        }, forSchleife*400);
     }
+
 
     function icon(choice, x) {
         let insertIcon = $('#outputChoice' + x);
@@ -129,6 +123,21 @@
             case 3:
                 insertIcon.html('<img class="img-fluid" src="img/scissors.png" alt="Schere">');
                 break;
+        }
+    }
+
+
+    function checkEnd() {
+        if(userWins === 3 || compWins === 3) {
+            if(userWins > compWins) {
+                // ToDo Ausgabe #info User hat gewonnen
+                $('#info').text('User hat gewonnen');
+            } else {
+                // ToDo Ausgabe #info Computer hat gewonnen
+                $('#info').text('Computer hat gewonnen');
+            }
+            // ToDo Wenn Spiel beendet Buttons verstecken
+            $('button').hide();
         }
     }
 </script>

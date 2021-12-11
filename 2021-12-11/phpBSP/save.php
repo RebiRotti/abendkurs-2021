@@ -13,7 +13,7 @@ if($_POST['newEntry'] == 1) {
     // 'i' steht für integer
 
     $stmt->execute();
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+
 }
 
 // Update exist Entry
@@ -23,7 +23,7 @@ if($_POST['newEntry'] == 2) {
     $id = (int)$_POST['editID'];
     $stmt->bind_param("si", $name, $id);
     $stmt->execute();
-    header("Location: http://localhost/phpBSP/");
 }
+header("Location: " . $rootPath);
 $stmt->close();
 

@@ -7,8 +7,8 @@
 </head>
 <body>
     <?php
-    $sql = "SELECT * FROM beispiel_1 WHERE id = ?"; // SQL with parameters
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare("SELECT * FROM beispiel_1 WHERE id = ?"); // SQL with parameters
+    
     $id = (int)$_GET['entry'];
     $stmt->bind_param("i", $id);
     $stmt->execute();

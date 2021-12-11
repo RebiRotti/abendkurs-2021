@@ -18,10 +18,9 @@ if($_POST['newEntry'] == 1) {
 
 // Update exist Entry
 if($_POST['newEntry'] == 2) {
-    $sql = "UPDATE beispiel_1 SET name=? WHERE id=?";
-    $stmt= $conn->prepare($sql);
+    $stmt = $conn->prepare("UPDATE beispiel_1 SET name=? WHERE id=?");
     $name = $_POST['editName'];
-    $id = $_POST['editID'];
+    $id = (int)$_POST['editID'];
     $stmt->bind_param("si", $name, $id);
     $stmt->execute();
     header("Location: http://localhost/phpBSP/");

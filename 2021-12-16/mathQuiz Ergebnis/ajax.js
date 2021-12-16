@@ -46,8 +46,13 @@ function restartGame(id) {
             //console.log(data);
             let obj = JSON.parse(data);
             //console.log(obj);
+            localStorage.clear();
             localStorage.setItem('user', obj.user);
             localStorage.setItem('level', obj.level);
+            if(obj.flag == 0) {
+                localStorage.setItem('question', obj.question);
+                localStorage.setItem('right_answer', obj.right_answer);
+            }
             location.reload();
         },
         error: function(data) {

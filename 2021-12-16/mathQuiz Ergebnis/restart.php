@@ -16,9 +16,13 @@ while($row = $result->fetch_assoc()) {
     $output['user'] = $row['user'];
     if($row['right_answer'] == $row['user_answer']) {
         $row['level']++;
+        $output['flag'] = 1;
+    } else {
+        $output['right_answer'] = $row['right_answer'];
+        $output['question'] = $row['question'];
+        $output['flag'] = 0;
     }
     $output['level'] = $row['level'];
-
 }
 
 // Verbindungen schließen

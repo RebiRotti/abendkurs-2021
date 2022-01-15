@@ -1,18 +1,22 @@
-<?php // TODO ?>
+<?php include ('./inc/editEntry.inc.php'); ?>
 <!doctype html>
 <html>
 <?php
-// TODO
+require_once './inc/login.inc.php';
+session_start();
+if(!isset($_SESSION['username'])) {
+    header('location:index.php');
+}
 ?>
-<?php // TODO ?>
+<?php include('./inc/head.inc.php'); ?>
 <body>
 <main>
-    <?php // TODO ?>
+    <?php include('./inc/nav.inc.php'); ?>
     <article class="container">
-        <h1>Welcome <?= // TODO ?></h1>
+        <h1>Welcome <?= $_SESSION['username']; ?></h1>
     </article>
     <article class="m-2 text-center">
-        <?php // TODO ?>
+        <?php include('./inc/msg.inc.php'); ?>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNew">
             Add new
@@ -71,18 +75,19 @@
             </thead>
             <tbody>
             <?php
-            // TODO
+            $sql = "SELECT title, id, teaser FROM content";
+            foreach($conn->query($sql) as $row) {
             ?>
                 <tr>
-                    <td><?= // TODO ?></td>
-                    <td><?= // TODO ?></td>
+                    <td><?= $row['title'] ?></td>
+                    <td><?= $row['teaser'] ?></td>
                     <td>
-                        <a href="./editEntry.php?id=<?= // TODO ?>">Edit</a>
-                        <a href="./deleteEntry.php?id=<?= // TODO ?>">Delete</a>
+                        <a href="./editEntry.php?id=<?= $row['id'] ?>">Edit</a>
+                        <a href="./deleteEntry.php?id=<?= $row['id'] ?>">Delete</a>
                     </td>
                 </tr>
             <?php
-            // TODO
+            }
             ?>
             </tbody>
         </table>

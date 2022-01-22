@@ -17,7 +17,7 @@ if(!isset($_SESSION['username'])) {
         <?php
         if(isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            if(is_int($id)) {
+            if($id != 0) {
                 try {
                     $stmt = $conn->prepare('SELECT * FROM content WHERE id=:id');
                     $stmt->execute(array(':id' => $id));

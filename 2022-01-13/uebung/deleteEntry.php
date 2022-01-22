@@ -15,9 +15,9 @@ if(!isset($_SESSION['username'])) {
     <article class="container my-5 py-5">
 
         <?php
-        if(isset($_GET['id'])) {
+        if(isset($_GET['id']) && (!isset($_POST['btn_delete']))) {
             $id = intval($_GET['id']);
-            if(is_int($id)) {
+            if($id != 0) {
                 try {
                     $stmt = $conn->prepare('SELECT id, title FROM content WHERE id = :id');
                     $stmt->execute(array(':id' => $id));

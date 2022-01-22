@@ -18,7 +18,7 @@ include('./inc/head.inc.php');
                 <div class="col">
                     <div class="card">
                         <?php if($row['imgpath'] != NULL) { ?>
-                            <img src="<?= $row['imgpath'] ?>" class="card-img-top" alt="...">
+                            <img src="./uploads/<?= $row['imgpath'] ?>" class="card-img-top" alt="...">
                         <?php } ?>
                         <div class="card-body">
                             <h5 class="card-title"><?= $row['title'] ?></h5>

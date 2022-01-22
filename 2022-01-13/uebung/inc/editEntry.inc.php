@@ -14,19 +14,31 @@ if(isset($_POST['btn_add'])) {
         $errorMsg[] = "Enter Description";
     } else {
 
-        try {
-            $stmt = $conn->prepare(
-                'INSERT INTO content (title, teaser, description) VALUES (:title, :teaser, :description)'
-            );
-            if($stmt->execute(array(
-                ':title' => $title,
-                ':teaser' => $teaser,
-                ':description' => $description
-            ))) {
-                $successMsg = "Successfully";
+        $filename = NULL;
+        $uploadOk = 1;
+        include('./inc/saveFile.inc.php');
+        if($uploadOk == 1) {
+            try {
+                $stmt = $conn->prepare(
+                    'INSERT INTO content (title, teaser, description, imgpath) VALUES (:title, :teaser, :description, :imgpath)'
+                );
+                if($stmt->execute(array(
+                    ':title' => $title,
+                    ':teaser' => $teaser,
+                    ':description' => $description,
+                    ':imgpath' => $filename
+                ))) {
+                    if(isset($successMsg)) {
+                        $successMsg = "File upload & Eintrag erfolgreich bewältigt. Reload in 2 Sek";
+                    } else {
+                        $successMsg = "Eintrag gespeichert. Reload in 2 Sek";
+                    }
+                    header('refresh: 2; welcome.php');
+                }
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                unlink($target_file);
             }
-        } catch (PDOException $e) {
-            echo $e->getMessage();
         }
 
     }

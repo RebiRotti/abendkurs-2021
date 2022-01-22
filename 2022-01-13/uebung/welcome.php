@@ -30,7 +30,7 @@ if(!isset($_SESSION['username'])) {
                         <h5 class="modal-title">New Entry</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <input type="hidden" name="btn_add" value="true">
                             <div class="mb-3 row text-start">
@@ -52,7 +52,12 @@ if(!isset($_SESSION['username'])) {
                                               name="inputDescription" id="inputDescription"></textarea>
                                 </div>
                             </div>
-                            <!--<div class="mb-3">Fileupload</div>-->
+                            <div class="mb-3 row text-start">
+                                <label for="inputImage" class="col-sm-2 col-form-label">Image</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="inputImage" id="inputImage">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -68,19 +73,27 @@ if(!isset($_SESSION['username'])) {
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col" class="col-3">Title</th>
+                <th scope="col" class="col-3">Teaser</th>
+                <th scope="col" class="col-3">IMG</th>
+                <th scope="col" class="col-3">Edit</th>
             </tr>
             </thead>
             <tbody>
             <?php
-            $sql = "SELECT title, id, teaser FROM content";
+            $sql = "SELECT title, id, teaser, imgpath FROM content";
             foreach($conn->query($sql) as $row) {
             ?>
                 <tr>
                     <td><?= $row['title'] ?></td>
                     <td><?= $row['teaser'] ?></td>
+                    <td><?php
+                    if($row['imgpath'] != NULL) {
+                        echo '<span class="alert alert-success p-0">IMG vorhanden</span>';
+                    } else {
+                        echo '<span class="alert alert-danger p-0">IMG nicht vorhanden</span>';
+                    }
+                    ?></td>
                     <td>
                         <a href="./editEntry.php?id=<?= $row['id'] ?>">Edit</a>
                         <a href="./deleteEntry.php?id=<?= $row['id'] ?>">Delete</a>
